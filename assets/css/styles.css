@@ -225,6 +225,10 @@ figure {
   min-height: 12px;
   max-width: var(--read-width);
 }
+.post-header img {
+  /* lessen page load shift in some cases */
+  aspect-ratio: 16 / 9;
+}
 .read-content img,
 .page-reader img {
   display: block;
@@ -233,7 +237,7 @@ figure {
   object-fit: contain;
 }
 .page-reader {
-  /* Forces pages with reader css width to be centered will not conflicting with post margin */
+  /* Forces pages with reader css width to be centered and not conflicting with post margin */
   margin: auto;
 }
 
