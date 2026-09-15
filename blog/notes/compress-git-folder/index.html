@@ -16,8 +16,8 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Reduce the Size of a Git Repository">
     
-    <meta name="description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
-    <meta property="og:description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
+    <meta name="description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta compression.">
+    <meta property="og:description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta compression.">
     
     <meta property="og:url" content="https://closeencoders.com/blog/notes/compress-git-folder">
     <meta property="og:image" content="https://closeencoders.com/assets/img/posts/2026/git-reduce.png">
@@ -27,7 +27,7 @@
     <meta name="twitter:site" content="@closeencoders">
     <meta name="twitter:creator" content="@closeencoders">
     <meta name="twitter:title" content="Reduce the Size of a Git Repository">
-    <meta name="twitter:description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
+    <meta name="twitter:description" content="The .git directory in my project was becoming very large and searched for a way to reduce the size without any risk of loosing commit history. From reading...">
     <meta name="twitter:image" content="https://closeencoders.com/assets/img/posts/2026/git-reduce.png">
     <meta name="twitter:image:alt" content="Reduce the Size of a Git Repository">
     <meta property="article:published_time" content="2026-09-15 00:00:00 &#43;0000 UTC">
@@ -79,7 +79,7 @@
                     <div>
                         <p class="post-subtitle">
                             
-                            Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...
+                            Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta compression.
                             
                         </p>
                     </div>
@@ -103,7 +103,7 @@
                 <!-- © closeencoders.com. All rights reserved. -->
                 <div itemprop="articleBody"><p>The .git directory in my project was becoming very large and searched for a way to reduce the size without any risk of loosing commit history.</p>
 <p>From reading the git documentation, one way is to use the <a href="https://git-scm.com/docs/git-repack" target="_blank" rel="nofollow noopener noreferrer">repack command</a>, but I wanted confirmation that it's actually doing what I think its doing before running it. From my understanding, it will simply combine all the objects that are not already already in a pack into pack files with delta compression.</p>
-<p>I found the creator of Git <a href="https://gcc.gnu.org/legacy-ml/gcc/2007-12/msg00165.html" target="_blank" rel="nofollow noopener noreferrer">Linus Torvalds recommends</a> not using <code>--aggresive</code> but says repack will do the trick.</p>
+<p>I found the creator of Git <a href="https://gcc.gnu.org/legacy-ml/gcc/2007-12/msg00165.html" target="_blank" rel="nofollow noopener noreferrer">Linus Torvalds recommends</a> not using <code>--aggresive</code> but says repack will do the trick. This may be outdated information, but I have seen from a few other sources you should still avoid it.</p>
 <blockquote>
 <p>Absolutely. git --aggressive is mostly dumb. It's really only useful for<br>
 the case of &quot;I know I have a <em>really</em> bad pack, and I want to throw away<br>
