@@ -1,4 +1,4 @@
-//Copyright 2026 Close Encoders - closeencoders.com - All Rights Reserved
+// Copyright 2026 closeencoders.com. All Rights Reserved.
 class SearchManager {
     constructor(config = {}) {
         this.CONFIG = {
@@ -10,7 +10,6 @@ class SearchManager {
             SEARCH_PAGE_PATH: "/search/",
             ...config
         };
-
         this.state = {
             posts: [],
             postsLoaded: false,
@@ -18,41 +17,20 @@ class SearchManager {
             searchCount: 0,
             lastSearchAt: 0,
         };
-
-        this.init();
-    }
-
-    init() {
-        if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", () => this.setup());
-        } else {
-            this.setup();
-        }
-    }
-
-    setup() {
         this.setupEventListeners();
         this.fetchAndInjectPosts();
     }
 
-    isSearchPage() {
-        const path = window.location.pathname;
-        return path === this.CONFIG.SEARCH_PAGE_PATH || path === `${this.CONFIG.SEARCH_PAGE_PATH}index.html`;
-    }
-
     async fetchAndInjectPosts() {
-        const target = this.getEl("posts-space");
+        const target = document.getElementById("posts-space");
         if (!target) return;
-
         try {
             const response = await fetch(this.CONFIG.DATA_URL, { cache: "no-store" });
             if (!response.ok) throw new Error(`Status: ${response.status}`);
-
             const posts = await response.json();
             if (!Array.isArray(posts) || posts.length === 0) {
                 return this.renderMessage("No posts yet.");
             }
-
             this.state.posts = posts;
             this.state.postsLoaded = true;
             this.applySearch();
@@ -66,29 +44,21 @@ class SearchManager {
         value ? url.searchParams.set("q", value) : url.searchParams.delete("q");
         window.history.replaceState({}, "", url);
     }
-
-    getEl(id) {
-        return document.getElementById(id);
-    }
-
     renderMessage(msg) {
         this.updateUI(`<p>${msg}</p>`);
     }
-
     updateUI(html) {
-        const target = this.getEl("posts-list");
+        const target = document.getElementById("posts-list");
         if (target) target.innerHTML = html;
     }
 
     canRunSearch() {
         const now = Date.now();
         if (now - this.state.lastSearchAt < this.CONFIG.SEARCH_MIN_INTERVAL_MS) return false;
-
         if (!this.state.searchWindowStart || (now - this.state.searchWindowStart > this.CONFIG.SEARCH_WINDOW_MS)) {
             this.state.searchWindowStart = now;
             this.state.searchCount = 0;
         }
-
         this.state.lastSearchAt = now;
         return ++this.state.searchCount <= this.CONFIG.SEARCH_MAX_PER_WINDOW;
     }
@@ -98,12 +68,12 @@ class SearchManager {
         const queryFromUrl = urlParams.get("q") || "";
         const query = (rawQuery !== undefined ? rawQuery : queryFromUrl).trim();
 
-        const input = this.getEl("posts-search-input");
+        const input = document.getElementById("posts-search-input");
         if (input && rawQuery === undefined) input.value = query;
 
         const isManualAction = rawQuery !== undefined;
 
-        if (!this.isSearchPage() && isManualAction) {
+        if (isManualAction) {
             const targetUrl = query
                 ? `${this.CONFIG.SEARCH_PAGE_PATH}?q=${encodeURIComponent(query)}`
                 : this.CONFIG.SEARCH_PAGE_PATH;
@@ -112,14 +82,11 @@ class SearchManager {
         }
 
         if (!this.state.postsLoaded) return;
-        if (!this.isSearchPage()) return;
         if (!query) return;
-
         if (query.length < this.CONFIG.MIN_QUERY_LEN) {
             this.updateQueryParam("");
             return this.renderMessage("Search term too short.");
         }
-
         if (this.canRunSearch()) {
             const lowered = query.toLowerCase();
             const filtered = this.state.posts.filter(p =>
@@ -137,35 +104,28 @@ class SearchManager {
             .map((post) => {
                 const dateOnly = post.date.split('T')[0];
                 const title = post.title || post.slug || "Untitled";
-                return `<a draggable="false" rel="noopener" href="${post.url}"><h2>${title}</h2>${dateOnly}${post.tags ? " | " + post.tags + " | " : ""}${post.description || ""}</a>`;
+                return `<a draggable="false" rel="noopener" href="${post.url}"><h2>${title}</h2>${dateOnly}:${post.tags ? " | " + post.tags + " | " : ""}${post.description || ""}</a>`;
             }).join("");
-
         this.updateUI(items);
     }
 
-
     setupEventListeners() {
-        const input = this.getEl("posts-search-input");
-        const searchBtn = this.getEl("posts-search-button");
-        const resetBtn = this.getEl("posts-reset-button");
-
+        const input = document.getElementById("posts-search-input");
+        const searchBtn = document.getElementById("posts-search-button");
+        const resetBtn = document.getElementById("posts-reset-button");
         const runSearch = () => this.applySearch(input.value);
-
         // Search Execution
         input?.addEventListener("keydown", e => e.key === "Enter" && (e.preventDefault(), runSearch()));
         searchBtn?.addEventListener("click", runSearch);
-
         // Reset logic
         resetBtn?.addEventListener("click", () => {
             if (input) {
                 input.value = "";
-                if (this.isSearchPage()) {
-                    this.applySearch("");
-                    this.updateUI("")
-                }
+                this.applySearch("");
+                this.updateUI("")
+                this.updateQueryParam("")
             }
         });
     }
 }
 const searchManager = new SearchManager();
-// Copyright 2026 Close Encoders - closeencoders.com - All Rights Reserved
