@@ -15,7 +15,7 @@
     0 0 7px var(--active),
     0 0 10px var(--active),
     0 0 20px var(--active),
-    0 0 40px var(--active);
+    0 0 39px var(--active);
 
   --max-width: 80rem;
   --read-width: 42rem;
@@ -28,11 +28,11 @@
   --default-font: source-serif-pro, Georgia, Cambria, "Times New Roman", Times, serif;
   --heading-font: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-
 html {
   scrollbar-gutter: stable;
   background-color: var(--bg-color);
-  scroll-behavior: smooth;
+  /* Images does not have placeholder height, so this is broken by default */
+  /* scroll-behavior: smooth; */
 }
 body {
   margin: 0;
@@ -59,10 +59,10 @@ h2 {
   font-size: clamp(2rem, 8vw, 2.3rem);
 }
 h3 {
-  font-size: 1.76rem;
+  font-size: 1.77rem;
 }
 h4 {
-  font-size: 1.45rem;
+  font-size: 1.46rem;
 }
 h5 {
   font-size: 1.40rem;
@@ -83,6 +83,10 @@ blockquote {
 }
 blockquote p {
   margin: 0.25rem 0;
+}
+figure {
+  padding: 0;
+  margin: 0;
 }
 
 .wrap {
@@ -205,43 +209,32 @@ blockquote p {
 }
 
 /* CONTENT - Copyright 2026 closeencoders.com - All Rights Reserved */
-.post-header {
-  width: 100%;
-  padding-bottom: 1rem;
-}
 .post-header p,
 .post-header h1 {
   margin: 0;
-  padding: 0 0 1.3rem;
+  padding: 0 0 1rem;
+  line-height: 1.1;
 }
 .post-header p {
   font-style: oblique;
-  line-height: 1.2;
 }
-.post-header figure {
-  padding: 0;
-  margin: 0;
-}
-.post-hero,
-.post-hero img {
-  width: 100%;
-  display: block;
-}
-.post-hero {
-  overflow: hidden;
-}
-.post-hero img {
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
-
+.page-reader,
+.post-header,
 .read-content {
-  min-width: 10px;
+  min-width: 12px;
+  min-height: 12px;
   max-width: var(--read-width);
 }
-.read-content img {
+.read-content img,
+.page-reader img {
+  display: block;
   width: 100%;
+  min-height: 100px;
+  object-fit: contain;
+}
+.page-reader {
+  /* Forces pages with reader css width to be centered will not conflicting with post margin */
+  margin: auto;
 }
 
 .section a {
@@ -362,15 +355,6 @@ blockquote p {
 .post-card:hover :is(h2, h3) {
   color: var(--active);
   text-decoration: underline;
-}
-
-.read-page {
-  min-width: 10px;
-  max-width: var(--read-width);
-  margin: auto;
-}
-.read-page img {
-  width: 100%;
 }
 
 @media (max-width: 950px) {
@@ -629,11 +613,8 @@ pre code.hljs {
 .side-car-container {
   position: sticky;
   top: 0;
-  justify-content: start;
-  align-items: flex-start;
   padding-top: 15px;
   padding-left: 5px;
-  min-width: 150px;
   max-width: 350px;
 }
 .table-of-contents-container a:hover {
