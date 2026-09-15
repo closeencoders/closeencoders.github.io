@@ -59,10 +59,10 @@ h2 {
   font-size: clamp(2rem, 8vw, 2.3rem);
 }
 h3 {
-  font-size: 1.75rem;
+  font-size: 1.76rem;
 }
 h4 {
-  font-size: 1.50rem;
+  font-size: 1.45rem;
 }
 h5 {
   font-size: 1.40rem;
@@ -645,13 +645,9 @@ pre code.hljs {
   padding: 0;
   margin: 0;
   padding-left: 9px;
-  border-left: 1px dashed var(--accent);
+  border-left: 2px dashed var(--accent);
   font-size: var(--sub-font-size);
   height: auto;
-}
-.table-of-contents-container li {
-  padding: 7px 0;
-  line-height: 1;
 }
 #backToTop {
   display: none;
