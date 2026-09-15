@@ -6,30 +6,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <link rel="preload" as="image" href="/assets/img/posts/2026/git-reduce.png" fetchpriority="high">
+    
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <title>Notes</title>
-    <meta name="description" content="Notes on what I am learning or doing">
+    <title>Reduce the Size of a Git Repository</title>
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://closeencoders.com/blog/notes">
+    <link rel="canonical" href="https://closeencoders.com/blog/notes/compress-git-folder">
     <meta property="og:site_name" content="Close Encoders">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Notes">
-    <meta property="og:description" content="Notes on what I am learning or doing">
-    <meta property="og:url" content="https://closeencoders.com/blog/notes">
-    <meta property="og:image"content="https://closeencoders.comassets/img/white-logo-bg.jpg">
-    <meta property="og:image:alt" content="Notes">
-    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Reduce the Size of a Git Repository">
+    
+    <meta name="description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
+    <meta property="og:description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
+    
+    <meta property="og:url" content="https://closeencoders.com/blog/notes/compress-git-folder">
+    <meta property="og:image" content="https://closeencoders.com/assets/img/posts/2026/git-reduce.png">
+    <meta property="og:image:alt" content="Reduce the Size of a Git Repository">
+    <meta property="og:locale" content="en_US">    
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@closeencoders">
     <meta name="twitter:creator" content="@closeencoders">
-    <meta name="twitter:title" content="Notes">
-    <meta name="twitter:description" content="Notes on what I am learning or doing">
-    <meta name="twitter:image" content="https://closeencoders.comassets/img/white-logo-bg.jpg">
-    <meta name="twitter:image:alt" content="Notes">
+    <meta name="twitter:title" content="Reduce the Size of a Git Repository">
+    <meta name="twitter:description" content="Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...">
+    <meta name="twitter:image" content="https://closeencoders.com/assets/img/posts/2026/git-reduce.png">
+    <meta name="twitter:image:alt" content="Reduce the Size of a Git Repository">
+    <meta property="article:published_time" content="2026-09-15 00:00:00 &#43;0000 UTC">
+    <meta property="article:author" content="@closeencoders">
     <link rel="icon" href="/favicon.webp" type="image/webp">
 </head>
 <body>
-    <!-- © closeencoders.com. All rights reserved. -->
     <header class="header" data-nosnippet>
     <!-- © closeencoders.com. All rights reserved. -->
     <nav class="wrap top-nav" role="navigation" aria-label="Primary Navigation" data-nosnippet>
@@ -67,98 +72,59 @@
 </header>
 
     <main class="wrap" data-label="Property Of closeencoders.com © All Rights Reserved.">
-        <div class="title-divider">
-    <div class="item-left">
-        <div class="tab-button-container">
-            <a href="/blog" class="tab-button">ALL</a>
-            <a href="/blog/posts" class="tab-button">POSTS</a>
-            <a href="/blog/notes" class="tab-button active-tab">NOTES</a>
-            <a href="/blog/stories" class="tab-button">STORIES</a>
-            <a href="/blog/gaming" class="tab-button">GAMING</a>
-            <a href="/blog/updates" class="tab-button">UPDATES</a>
-        </div>
-    </div>
+        <div class="content-container">
+            <article class="section read-content" itemscope itemtype="https://schema.org/BlogPosting">
+                <header class="post-header">
+                    <h1 itemprop="headline">Reduce the Size of a Git Repository</h1>
+                    <div>
+                        <p class="post-subtitle">
+                            
+                            Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...
+                            
+                        </p>
+                    </div>
+                    <p class="post-metadata" data-nosnippet>
+                        By
+                        <a href="/about" rel="noopener" itemprop="author" itemscope itemtype="https://schema.org/Person"><span itemprop="name">Josh</span></a>
+                        <span> - </span>
+                        <time datetime="2026-09-15T00:00:00Z" itemprop="datePublished">Sep 15, 2026</time>
+                         | notes
+                        <br>Tags: software, source-control
+                    </p>
+                    
+                    <figure class="post-hero" itemprop="image">
+                        <picture>
+                            <source srcset="/assets/img/posts/2026/git-reduce.png" type="image/webp">
+                            <img src="/assets/img/large-logo.png" alt="Reduce the Size of a Git Repository">
+                        </picture>
+                    </figure>
+                    
+                </header>
+                <!-- © closeencoders.com. All rights reserved. -->
+                <div itemprop="articleBody"><p>The .git directory in my project was becoming very large and searched for a way to reduce the size without any risk of loosing commit history.</p>
+<p>From reading the git documentation, one way is to use the <a href="https://git-scm.com/docs/git-repack" target="_blank" rel="nofollow noopener noreferrer">repack command</a>, but I wanted confirmation that it's actually doing what I think its doing before running it. From my understanding, it will simply combine all the objects that are not already already in a pack into pack files with delta compression.</p>
+<p>I found the creator of Git <a href="https://gcc.gnu.org/legacy-ml/gcc/2007-12/msg00165.html" target="_blank" rel="nofollow noopener noreferrer">Linus Torvalds recommends</a> not using <code>--aggresive</code> but says repack will do the trick.</p>
+<blockquote>
+<p>Absolutely. git --aggressive is mostly dumb. It's really only useful for<br>
+the case of &quot;I know I have a <em>really</em> bad pack, and I want to throw away<br>
+all the bad packing decisions I have done&quot;</p>
+</blockquote>
+<p>For me, it reduced the size by nearly a third, which was surprising. Just be aware its can be extremely slow.</p>
+<pre><code class="language-bash">git repack -a -d -f --depth=250 --window=250
+</code></pre>
+<p>For the &quot;-f&quot; this was the reasoning I saw:</p>
+<blockquote>
+<p>And here, you might well want to add the &quot;-f&quot; flag (which is the &quot;drop all<br>
+old deltas&quot;, since you now are actually trying to make sure that this one<br>
+actually finds good candidates.</p>
+</blockquote>
+<p>I discovered this information from a <a href="https://github.com/felipec/git-remote-hg/issues/39" target="_blank" rel="nofollow noopener noreferrer">Github post</a> of all things. And another post that was helpful later on: <a href="https://www.jonathancreamer.com/how-we-shrunk-our-git-repo-size-by-94-percent/" target="_blank" rel="nofollow noopener noreferrer">How we shrunk our Javascript monorepo git size by 94%</a></p>
+<p><strong>(I am still learning about deltas, pack files, and delta compression. I will update this file as I understand it better.)</strong></p>
 </div>
-<div id="posts-list" class="posts-na" role="feed" aria-label="Blog posts">
-<article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/compress-git-folder">
-        <h2 itemprop="headline">Reduce the Size of a Git Repository</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                Sep 15, 2026 | notes 
-                 | software, source-control
-            </p>
+            </article>
+            
         </div>
-        <p itemprop="description">Learning about how git repack works and how it can reduce the size of a Git repository. This also leads me to want to learn more about pack files and delta...</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/firmware-vs-software">
-        <h2 itemprop="headline">Firmware vs. Software</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                Aug 13, 2026 | notes 
-                 | software, firmware
-            </p>
-        </div>
-        <p itemprop="description">What is the difference between firmware and software? These notes explain some key differences in a simple and easy to understand way.</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/simple-firewall-on-debian">
-        <h2 itemprop="headline">Simple Firewall Setup on Debian</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                Jul 22, 2026 | notes 
-                 | software, security
-            </p>
-        </div>
-        <p itemprop="description">How to install and configure a simple firewall on Debian as fast as possible.</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/pretty-paths-to-html">
-        <h2 itemprop="headline">Simple &#34;Pretty&#34; URLs for Static Pages Without Configuration</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                May 18, 2026 | notes 
-                 | software, web
-            </p>
-        </div>
-        <p itemprop="description">Some simple ways to have pretty urls for a static website, but it has drawbacks without server configuration.</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/sticky-position-css-for-side-navigation">
-        <h2 itemprop="headline">Sticky Position CSS For Side Navigation</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                May 05, 2026 | notes 
-                 | software, web
-            </p>
-        </div>
-        <p itemprop="description">How to make an element stay/stick with your viewport as you scroll in HTML and CSS</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/anchor-tags-in-new-tabs">
-        <h2 itemprop="headline">Make Anchor Tag Links Open in New Tabs Securely</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                May 03, 2026 | notes 
-                 | software, web
-            </p>
-        </div>
-        <p itemprop="description">Make anchor tag links a bit more secure by opening them in a new tab with rel and target properties.</p>
-    </a>
-</article><article itemscope itemtype="https://schema.org/BlogPosting">
-    <a draggable="false" class="post-card" rel="noopener follow" href="/blog/notes/masonry-css-layout">
-        <h2 itemprop="headline">Making Cards use Masonry Layout in CSS or JavaScript</h2>
-        <div class="post-card-text">
-            <p data-nosnippet>
-                May 03, 2026 | notes 
-                 | software, web
-            </p>
-        </div>
-        <p itemprop="description">A few ways to force the Masonry layout, but without newer browser support or some additional JavaScript, it&#39;s annoying.</p>
-    </a>
-</article>
-</div>
+        <!-- © closeencoders.com. All rights reserved. -->
     </main>
     <footer class="site-footer" data-nosnippet>
     <!-- © closeencoders.com. All rights reserved. -->
@@ -193,6 +159,11 @@
     </nav>
 </footer>
 
+    <script src="/assets/js/highlight/highlight.min.js" async></script>
     <script src="/assets/js/main.js" defer></script>
+    <script>
+    window.addEventListener('load', function() {if (typeof hljs !== 'undefined') { hljs.highlightAll(); }});
+    </script>
+    <!-- © closeencoders.com. All rights reserved. -->
 </body>
 </html>
