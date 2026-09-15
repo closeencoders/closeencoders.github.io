@@ -36,6 +36,9 @@ function setupEventListeners() {
       }
     };
     backToTopButton.onclick = function () {
+      var url = new URL(window.location.href);
+      url.hash = '';
+      window.history.replaceState({}, document.title, url.toString());
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   }
