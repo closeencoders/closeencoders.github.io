@@ -4,7 +4,7 @@
   --accent: #353737;
   --accent-light: #E1E8F0;
   --accent-soft: #F5F5DC;
-  --bg-color: #151518;
+  --bg-color: #1d1d1d;
   --alt-text-color: #dad9d9;
   --text-color: #e3e3e3;
   --active: #f9f9f9;
@@ -30,8 +30,8 @@
   --read-width: 41rem;
 
   --top-nav-height: 3.75rem;
-  --mobile-font-size: 1.125rem;
-  --desktop-font-size: 1.25rem;
+  --mobile-font-size: 1.135rem;
+  --desktop-font-size: 1.26rem;
 
   --sub-font-size: 1.0625rem;
   --sub-heading-font-size: 1.4rem;
