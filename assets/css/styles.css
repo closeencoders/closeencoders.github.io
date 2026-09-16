@@ -26,13 +26,17 @@
   --syn-purple: #b07edc;
   --syn-text: #a4c3e6;
 
-  --max-width: 80rem;
-  --read-width: 40rem;
-  --top-nav-height: 60px;
-  --mobile-font-size: 18px;
-  --desktop-font-size: 20px;
-  --sub-font-size: 17px;
-  --code-font-size: 14px;
+  --max-width: clamp(77rem, 50vw, 92rem);
+  --read-width: 41rem;
+
+  --top-nav-height: 3.75rem;
+  --mobile-font-size: 1.125rem;
+  --desktop-font-size: 1.25rem;
+
+  --sub-font-size: 1.0625rem;
+  --sub-heading-font-size: 1.4rem;
+  --preview-font-size: 1.5rem;
+  --code-font-size: 0.875rem;
 }
 html {
   scrollbar-gutter: stable;
@@ -49,7 +53,7 @@ body {
 }
 p, ul, ol {
   font-size: var(--desktop-font-size);
-  line-height: 1.6em;
+  line-height: 1.6;
   font-weight: normal;
 }
 h1, h2, h3, h4, h5, h6 {
@@ -219,6 +223,7 @@ figure {
   line-height: 1.1;
 }
 .post-header p {
+  font-style: oblique;
   font-size: var(--sub-font-size);
 }
 .page-reader,
@@ -346,7 +351,7 @@ figure {
   line-height: 1.1;
 }
 .post-card h2, h3 {
-  font-size: 1.4rem;
+  font-size: var(--sub-heading-font-size);
 }
 .post-card p {
   color: var(--alt-text-color);
@@ -356,7 +361,7 @@ figure {
   font-size: 46px;
 }
 .posts>*:first-child p {
-  font-size: 24px;
+  font-size: var(--preview-font-size);
 }
 .post-card:hover :is(h2, h3) {
   color: var(--active);
@@ -553,52 +558,80 @@ pre code.hljs {
   padding: 15px;
   border: 1px dashed var(--accent);
 }
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
 
-.hljs {
+/* PrismJS 1.30.0 */
+code[class*=language-], pre[class*=language-] {
+  /* color: #fff; */
+  background: 0 0;
+  /* text-shadow: 0 -.1em .2em #000; */
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none
+}
+@media print {
+  code[class*=language-], pre[class*=language-] {
+    text-shadow: none
+  }
+}
+:not(pre)>code[class*=language-], pre[class*=language-] {
   background: var(--bg-color);
-  color: var(--accent-light)
 }
-.hljs-emphasis {
-  font-style: italic;
+pre[class*=language-] {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
+  border: 1px dashed var(--accent);
 }
-.hljs-strong {
-  font-weight: 800;
+:not(pre)>code[class*=language-] {
+  padding: .15em .2em .05em;
+  border-radius: .3em;
+  white-space: normal
 }
-.hljs-comment, .hljs-meta {
+.token.cdata, .token.comment, .token.doctype, .token.prolog {
   color: var(--syn-comment);
 }
-.hljs-deletion, .hljs-doctag, .hljs-regexp, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-selector-pseudo, .hljs-tag, .hljs-template-tag, .hljs-variable.language_ {
+.token.punctuation {
+  opacity: .7
+}
+.token.namespace {
+  opacity: .7
+}
+.token.boolean, .token.constant, .token.number, .token.property, .token.symbol, .token.tag {
   color: var(--syn-pink);
 }
-.hljs-link, .hljs-literal, .hljs-number, .hljs-params, .hljs-template-variable, .hljs-type, .hljs-variable {
-  color: var(--syn-orange);
-}
-.hljs-attribute, .hljs-built_in, .hljs-keyword.git {
-  color: var(--syn-yellow);
-}
-.hljs-keyword, .hljs-property, .hljs-subst, .hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_ {
-  color: var(--syn-cyan);
-}
-.hljs-selector-tag {
-  color: var(--syn-teal);
-}
-.hljs-addition, .hljs-bullet, .hljs-quote, .hljs-string, .hljs-symbol {
+.token.attr-name, .token.builtin, .token.char, .token.inserted, .token.selector, .token.string {
   color: var(--syn-green);
 }
-.hljs-code, .hljs-formula, .hljs-section {
-  color: var(--syn-blue);
+.language-css .token.string, .style .token.string, .token.entity, .token.operator, .token.url, .token.variable {
+  color: var(--syn-yellow);
 }
-.hljs-attr, .hljs-char.escape_, .hljs-name, .hljs-operator {
+.token.atrule, .token.attr-value, .token.keyword {
   color: var(--syn-purple);
 }
-.hljs-punctuation {
-  color: var(--syn-text);
+.token.important, .token.regex, .token.function {
+  color: var(--syn-orange);
+}
+.token.bold, .token.important {
+  font-weight: 700
+}
+.token.italic {
+  font-style: italic
+}
+.token.entity {
+  cursor: help
+}
+.token.deleted {
+  color: red
 }
