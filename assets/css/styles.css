@@ -32,7 +32,7 @@
   --mobile-font-size: 18px;
   --desktop-font-size: 20px;
   --sub-font-size: 17px;
-  --code-font-size: 15px;
+  --code-font-size: 14px;
 }
 html {
   scrollbar-gutter: stable;
@@ -560,19 +560,6 @@ pre code.hljs {
 }
 code.hljs {
   padding: 3px 5px
-}
-
-root {
-  --syn-comment: #848db4;
-  --syn-pink: #ff7a90;
-  --syn-orange: #f2a858;
-  --syn-yellow: #edd560;
-  --syn-cyan: #62bef3;
-  --syn-teal: #53e4ce;
-  --syn-green: #a6dc70;
-  --syn-blue: #628ae1;
-  --syn-purple: #b07edc;
-  --syn-text: #a4c3e6;
 }
 
 .hljs {
