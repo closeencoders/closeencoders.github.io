@@ -118,7 +118,7 @@
 <p>Moving into an example, if I make a very generic note about cows, it will only convey the meaning to my future self that the file is about cows. The note's contents become too abstracted away from the user and force you to search through it.</p>
 <p>I made <em><strong>heavily</strong></em> simplified visuals in Markdown, but I think it gets the point across.</p>
 <p><code>Cow.md</code></p>
-<pre><code class="language-text"># Cow
+<pre><code class="language-markdown"># Cow
 
 Their stomachs are divded into 4 compartments. They digest grass slowly in stages.
 If you farm cows, it's important to note this process.
@@ -135,7 +135,7 @@ As I wrote this, I thought cows had 4 stomachs, but they actually have 4 compart
 <p>Solid cases for broad files are dashboards, hubs, and categories, especially when the entire body of notes is on a specific subject. In this case, it may make sense to use <code>Cow.md</code> (or maybe something like <code>Agriculture.md</code>) as a kind of index page that links to everything and the key ideas, but all the subtopics on cows could still remain in their own note files to keep them isolated, searchable, and reusable. Most note-taking applications like Obsidian have built-in functionality as well as several <a href="https://community.obsidian.md/search?q=dashboard" target="_blank" rel="nofollow noopener noreferrer">plugins for dashboards</a>.</p>
 <p>Unlike dashboards, I would argue that the process of collecting hundreds or even thousands of tidbits of information to support a topic and then compiling all the information into a single file with lots of headings is more like writing an essay. This is completely fine if that’s your goal, but there’s a way to make notes easier to find.</p>
 <p><code>Cow Stomach.md</code></p>
-<pre><code class="language-text"># Cow Stomach
+<pre><code class="language-markdown"># Cow Stomach
 
 Cow stomachs are divided into 4 compartments to aid in the digestion of grass more slowly in several stages.
 I found this interesting because XYZ...
@@ -144,13 +144,13 @@ I found this interesting because XYZ...
 <img src="/assets/img/posts/2026/obsidian-cow-search-ex1.webp" loading="lazy" alt="Cow Search Example">
 <p>This means that notes will not be interconnected based on the &quot;God Note&quot; without context, and should be easier to find. Take this next note about cow farming pulling in cow information as an example of what I mean.</p>
 <p><code>Cow Farming.md</code> &lt;-- <code>Cow Stomach.md</code></p>
-<pre><code class="language-text"># Cow Farming
+<pre><code class="language-markdown"># Cow Farming
 
 It's important to know how [[cow stomach]]s process what you feed them so you can keep them healthy.
 I found this interesting because XYZ...
 </code></pre>
 <p>With this, <code>Cow Stomachs.md</code> is now linked to <code>Cow Farming.md</code> without attaching everything you've ever learned about cows in <code>Cow.md</code> without context. This simultaneously avoids duplicating the source on cow digestion as you continue adding notes to related topics in the future to clarify why it's being referenced. The idea is to keep it flexible, try not to make notes too specific or too generic, state the concept clearly so that searching and linking is less annoying as you add more.</p>
-<pre><code class="language-text"># Cow Farming
+<pre><code class="language-markdown"># Cow Farming
 
 It's important to know how [[cow stomach]]s process what you feed them so you can keep [[cow]]s healthy.
 I found this interesting because XYZ...
@@ -176,24 +176,28 @@ You can make the entities plural like "Cows.md" and make everything lower case, 
 <p>It’s easy to force links and tags between notes because the graph view with all the pretty dots is amusing when there are tons of connections. The main focus for linking should be to create a simple breadcrumb trail in your notes so you can find it later, not to make it pretty. If you have too many links, it loses its meaning.</p>
 <p>Then stop. Try to keep working on whatever you are working on and avoid the trap.</p>
 <p>Once you are sure the topic is understood and can only be one of a handful of categories, then I would consider adding metadata classifications like “science” or whatever, but try keep these broad. I cannot tell you how many times in the beginning I had to come back and revise my tags because I eventually hit an edge case that causes it to no longer make sense. Even my example below could eventually hit an edge case, at what point does learning about cows become agriculture or remain biology?</p>
-<pre><code class="language-text">---
+<p><code>Cow Farming.md</code></p>
+<pre><code class="language-yaml">---
 category: [[agriculture]]
 tags:
   - farming
   - ...
 ---
-# Cow Farming
+</code></pre>
+<pre><code class="language-markdown"># Cow Farming
 
 It's important to know how a [[cow stomach]] processes what you feed the cow so you can keep them healthy while [[farming]].
 I found this interesting because XYZ...
 </code></pre>
-<pre><code class="language-text">---
+<p><code>Cow Stomachs.md</code></p>
+<pre><code class="language-yaml">---
 category: [[biology]]
 tags:
   - digestion
   - ...
 ---
-# Cow Stomachs
+</code></pre>
+<pre><code class="language-markdown"># Cow Stomachs
 
 [[Cow]] stomachs are divided into 4 compartments which aid in the digestion of grass more slowly in several stages.
 (https://external-cow-source.zom)

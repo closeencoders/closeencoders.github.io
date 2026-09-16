@@ -104,22 +104,18 @@
 <p>From reading the git documentation, one way is to use the <a href="https://git-scm.com/docs/git-repack" target="_blank" rel="nofollow noopener noreferrer">repack command</a>, but I wanted confirmation that it's actually doing what I think its doing before running it. From my understanding, it will simply combine all the objects that are not already already in a pack into pack files with delta compression.</p>
 <p>I found the creator of Git <a href="https://gcc.gnu.org/legacy-ml/gcc/2007-12/msg00165.html" target="_blank" rel="nofollow noopener noreferrer">Linus Torvalds recommends</a> not using <code>--aggresive</code> but says repack will do the trick. This may be outdated information for 2007, <em>but</em> I have seen from a few other sources you should still avoid it for some reason. I thought <a href="https://github.blog/open-source/git/git-2-11-has-been-released/" target="_blank" rel="nofollow noopener noreferrer">Git was updated since then</a>, so newer versions after 2016 don't have any issues like this.</p>
 <p>Specifically:</p>
-<pre><code class="language-bash">git gc --aggressive
+<pre><code class="language-shell">$ git gc --aggressive
 </code></pre>
 <p>The reasoning for being against the aggressive flag:</p>
 <blockquote>
-<p>Absolutely. git --aggressive is mostly dumb. It's really only useful for<br>
-the case of &quot;I know I have a <em>really</em> bad pack, and I want to throw away<br>
-all the bad packing decisions I have done&quot;</p>
+<p>&quot;Absolutely. git --aggressive is mostly dumb. It's really only useful for the case of &quot;I know I have a <em>really</em> bad pack, and I want to throw away all the bad packing decisions I have done&quot;</p>
 </blockquote>
 <p>For me, it reduced the size by nearly a third, which was surprising. Just be aware its can be extremely slow.</p>
-<pre><code class="language-bash">git repack -a -d -f --depth=250 --window=250
+<pre><code class="language-shell">$ git repack -a -d -f --depth=250 --window=250
 </code></pre>
 <p>For the &quot;-f&quot; flag, this was the reasoning:</p>
 <blockquote>
-<p>And here, you might well want to add the &quot;-f&quot; flag (which is the &quot;drop all<br>
-old deltas&quot;, since you now are actually trying to make sure that this one<br>
-actually finds good candidates.</p>
+<p>&quot;And here, you might well want to add the &quot;-f&quot; flag (which is the &quot;drop all old deltas&quot;, since you now are actually trying to make sure that this one actually finds good candidates.&quot;</p>
 </blockquote>
 <p>I discovered this information from a <a href="https://github.com/felipec/git-remote-hg/issues/39" target="_blank" rel="nofollow noopener noreferrer">Github post</a> of all things. And another post that was helpful later on: <a href="https://www.jonathancreamer.com/how-we-shrunk-our-git-repo-size-by-94-percent/" target="_blank" rel="nofollow noopener noreferrer">How we shrunk our Javascript monorepo git size by 94%</a></p>
 <p><strong>(I am still learning about deltas, pack files, and delta compression. I will update this file as I understand it better.)</strong></p>
