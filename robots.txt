@@ -1,94 +1,64 @@
-Sitemap: https://www.closeencoders.com/sitemap.xml
+# As a condition of accessing this website (closeencoders.com), you agree to abide by the following rules in this robots.txt
 
-# TDM Reservation for AI Training (W3C TDMRep)
-# x-tdm-reservation: 1
+# ALLOWED MAJOR SEARCH ENGINES & SOCIAL PREVIEWS
+User-agent: Applebot
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: FacebookBot
+User-agent: Googlebot
+User-agent: Slurp
+User-agent: Twitterbot
 
-# General rules for reputable search engines
-User-agent: *
+# ALLOWED HIGH-VALUE AI SEARCH & REAL-TIME FETCHERS
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: DuckAssistBot
+User-agent: Meta-ExternalFetcher
+User-agent: OAI-SearchBot
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: xAI-Bot
+
+# MISC
+User-agent: AhrefsBot
+Allow: /
 Disallow: /data
+Disallow: /data/
 Disallow: /404
+Disallow: /404/
 Disallow: /video
+Disallow: /video/
 Disallow: /privacy
+Disallow: /privacy/
 Disallow: /search
+Disallow: /search/
 Disallow: /social
+Disallow: /social/
 Disallow: /reports
+Disallow: /reports/
+Disallow: /wp-admin
+Disallow: /wp-admin/
+Disallow: /checkout
+Disallow: /checkout/
+Disallow: /cart
+Disallow: /cart/
+Disallow: /account
+Disallow: /account/
+Disallow: /.env
+Disallow: /.env/
 
-# --- COMMENTED OUT FOR ALLOWED SEO & SOCIAL VISIBILITY ---
-# User-agent: Applebot
-# User-agent: Googlebot
-# User-agent: Meta-ExternalAgent
-# User-agent: Meta-ExternalFetcher
-# User-agent: PerplexityBot
-# User-agent: Perplexity-ai
-# User-agent: Perplexity-User
-# User-agent: DuckAssistBot
-# User-agent: AhrefsBot
-# User-agent: msnbot
-# User-agent: bingbot
-# User-agent: Claude-SearchBot
-# User-agent: OAI-SearchBot
-# User-agent: Slurp
-# User-agent: iaskspider
-# User-agent: FacebookBot
-# User-agent: GrokBot
-
-# --- NOT ALLOWED TO THE FULL EXTENT A robots.txt CAN ---
-User-agent: GPTBot
-User-agent: Google-Extended
-User-agent: Google-CloudVertexBot
+# ADDITIONAL EXPLICIT DISALLOW REQUESTS
+User-agent: Applebot-Extended
 User-agent: ClaudeBot
 User-agent: Claude-User
-User-agent: anthropic-ai
-User-agent: CCBot
-User-agent: ERNIEBot
-User-agent: Bytespider
-User-agent: Amazonbot
-User-agent: Applebot-Extended
-
-User-agent: ChatGPT-User
-User-agent: cohere-ai
-User-agent: cohere-training-data-crawler
-User-agent: ia_archiver
-User-agent: omgili
-User-agent: omgilibot
-User-agent: MJ12bot
-User-agent: PiplBot
-User-agent: Diffbot
-User-agent: YouBot
-User-agent: Petalbot
-User-agent: ImagesiftBot
-User-agent: AI2Bot
-User-agent: AI2Bot-Dolma
-User-agent: DataForSeoBot
-User-agent: AwarioBot
-User-agent: AwarioSmartBot
-User-agent: AwarioRssBot
-User-agent: SemrushBot-OCOB
-User-agent: TurnitinBot
-User-agent: Timpibot
-User-agent: VelenPublicWebCrawler
-User-agent: ICC-Crawler
-User-agent: PanguBot
-User-agent: Sentibot
-User-agent: img2dataset
-User-agent: Meltwater
-User-agent: Seekr
-User-agent: peer39_crawler
-User-agent: FirecrawlAgent
-User-agent: Claude-Web
-User-agent: magpie-crawler
-User-agent: NewsNow
-User-agent: news-please
-User-agent: BLEXBot
-User-agent: Brightbot 1.0
-User-agent: DotBot
-User-agent: domainsproject.org
-User-agent: keys-so-bot
-User-agent: rogerbot
-User-agent: SEMrushBot
-User-agent: SerpstatBot
-User-agent: ChatGLM-Spider
-User-agent: EzoicBot
-User-agent: Moltbot
-User-agent: OpenClaw
+User-agent: Google-Extended
+User-agent: GPTBot
+User-agent: GrokBot
+User-agent: Meta-ExternalAgent
 Disallow: /
+
+# DISALLOW EVERYTHING ELSE
+User-agent: *
+Disallow: /
+
+Sitemap: https://www.closeencoders.com/sitemap.xml
